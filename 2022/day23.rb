@@ -59,7 +59,7 @@ end
 def first_half(grid, dir_order)
   grid.elves.each do |elf|
     elf.proposal = nil
-    positions = ALL_DIRECTIONS.to_h { |dir| [dir, grid.pin_at?(elf, dir) ]}
+    positions = ALL_DIRECTIONS.to_h { |dir| [dir, grid.pin_in_direction?(elf, dir) ]}
     next if positions.values.none?
 
     dir_order.each do |dir|

@@ -1,8 +1,13 @@
 class Point
-  attr_accessor :x, :y
-  def initialize(x, y)
+  attr_accessor :x, :y, :grid_char
+  def initialize(x, y, c=nil)
     self.x = x
     self.y = y
+    self.grid_char = c
+  end
+
+  def self.from_point(point)
+    self.new(point.x, point.y, point.grid_char)
   end
 
   def ==(point)
@@ -18,11 +23,11 @@ class Point
   end
 
   def add_vector(vector)
-    Point.new(self.x + vector.x, self.y + vector.y)
+    self.class.new(self.x + vector.x, self.y + vector.y, self.grid_char)
   end
 
   def to_s
-    "#{self.y},#{self.x}"
+    "#{self.x},#{self.y}"
   end
 
 end
