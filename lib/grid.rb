@@ -1,5 +1,17 @@
 require_relative './point'
 
+NORTH = Point::UP
+SOUTH = Point::DOWN
+WEST = Point::LEFT
+EAST = Point::RIGHT
+
+NORTHWEST = NORTH.add_vector(WEST)
+NORTHEAST = NORTH.add_vector(EAST)
+SOUTHWEST = SOUTH.add_vector(WEST)
+SOUTHEAST = SOUTH.add_vector(EAST)
+
+ALL_DIRECTIONS = [NORTH, SOUTH, WEST, EAST, NORTHWEST, NORTHEAST, SOUTHWEST, SOUTHEAST]
+
 class Grid
   def expandable?
     true
@@ -55,12 +67,26 @@ class Grid
     nil
   end
 
+  def pin_at_point(point, type)
+    @pins[type][[point.x, point.y]]&.first
+  end
+
   def pins_at(x, y)
     @pins.values.map { |pin| pin[[x, y]]}.flatten.compact
   end
 
+  def pin_in_direction(point, direction, type)
+    self.pin_at_point(point.add_vector(direction), type)
+  end
+
   def pin_in_direction?(point, direction, type=nil)
     self.pin_at?(point.add_vector(direction), type)
+  end
+
+  def surrounding_pins(point, type=nil)
+    ALL_DIRECTIONS.map { |vector|
+      self.pin_at_point(point.add_vector(vector), type)
+    }.compact
   end
 
   def pin_at?(point, type=nil)
