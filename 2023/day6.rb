@@ -35,10 +35,14 @@ end
 
 def part2(input)
   time, distance = input
-  (1..distance).bsearch do
-
-  end
+  # we know that the midpoint can definitely win
+  # we also know that the pattern is a bell curve
+  # so we only need to check the first half
+  range = (0..time/2)
+  min_num = range.bsearch { |i| can_win?(i, time, distance) }
+  half_range = (time / 2) - min_num
+  half_range * 2 + 1
 end
 
 puts part1(input)
-puts part2(part2_sample)
+puts part2(part2input)
