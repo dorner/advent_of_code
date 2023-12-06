@@ -21,18 +21,6 @@ def part1(input)
   all_ways.inject(:*)
 end
 
-def bsearch(range, time, distance)
-  can_win_first = can_win?(range.first, time, distance)
-  can_win_last = can_win?(range.last, time, distance)
-  return range if can_win_first && can_win_last
-  return nil if !can_win_first && !can_win_last
-
-  midpoint = (range.last - range.first) / 2
-  left = bsearch(range.first..midpoint, time, distance)
-  right = bsearch(midpoint+1..range.last, time, distance)
-  left || right
-end
-
 def part2(input)
   time, distance = input
   # we know that the midpoint can definitely win
