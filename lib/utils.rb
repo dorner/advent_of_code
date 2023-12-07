@@ -19,7 +19,19 @@ module Utils
   def self.generate(dir)
     file_top = <<-TOP
 require_relative '../lib/utils'
+sample_input = Utils.lines(true)
 input = Utils.lines
+
+def part1(input)
+
+end
+
+def part2(input)
+
+end
+
+puts part1(sample_input)
+puts part2(sample_input)
     TOP
     Dir.mkdir("#{dir}")
     Dir.mkdir("#{dir}/data")
