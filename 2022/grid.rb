@@ -1,4 +1,4 @@
-require_relative './point'
+require_relative '../lib/point'
 
 NORTH = Point::UP
 SOUTH = Point::DOWN
